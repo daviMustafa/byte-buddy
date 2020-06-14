@@ -545,7 +545,7 @@ public interface JavaConstant {
         public static MethodHandle of(MethodDescription.InDefinedShape methodDescription) {
             return new MethodHandle(HandleType.of(methodDescription),
                     methodDescription.getDeclaringType().asErasure(),
-                    methodDescription.getInternalName(),
+                    methodDescription.isConstructor() ? "" : methodDescription.getInternalName(),
                     methodDescription.getReturnType().asErasure(),
                     methodDescription.getParameters().asTypeList().asErasures());
         }
@@ -574,7 +574,7 @@ public interface JavaConstant {
             }
             return new MethodHandle(HandleType.ofSpecial(methodDescription),
                     typeDescription,
-                    methodDescription.getInternalName(),
+                    methodDescription.isConstructor() ? "" : methodDescription.getInternalName(),
                     methodDescription.getReturnType().asErasure(),
                     methodDescription.getParameters().asTypeList().asErasures());
         }
